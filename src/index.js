@@ -5,7 +5,7 @@ const userRouter = require('./routes/user')
 const fileupload = require('express-fileupload')
 //Settings
 const port = process.env.PORT || 3000
-const URI = "mongodb+srv://toolboxdev-admin:A4310Hboi@toolboxdev-cluster-nkc6n.mongodb.net/test?retryWrites=true&w=majority"
+const URI = process.env.URI || "mongodb+srv://toolboxdev-admin:A4310Hboi@toolboxdev-cluster-nkc6n.mongodb.net/test?retryWrites=true&w=majority"
 
 const app = new(express)
 

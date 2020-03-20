@@ -5,7 +5,8 @@ export default function UserForm(props){
 
 	return(
 		<div className="container">
-			<form className="col s12 m4" onSubmit={props.handleAddUser}>
+			<form className="col s12 m4" 
+				onSubmit={(props._id==="")? props.handleAddUser : props.handleUpdateUser}>
 		      <div className="row">
 		        <div className="input-field col s12 ">
 		          <input name="name" type="text" onChange={props.handleChange} value={props.name}/>
@@ -30,10 +31,17 @@ export default function UserForm(props){
 				   </div>
 		      </div>
 		      <div className="row">
+		      	{(props._id ==="") ? 
 		      	<button className="btn waves-effect waves-light lime" type="submit" >
 		      		Submit
 		      		<i className="material-icons right">send</i>
 		      	</button>
+		      	:
+		      	<button className="btn waves-effect waves-light lime" type="submit" >
+		      		Edit
+		      		<i className="material-icons right">edit</i>
+		      	</button>
+		      	}
 		      	<button className="btn waves-effect waves-light red" type="cancel" >
 		      		Cancel
 		      		<i className="material-icons right">clear</i>

@@ -19,6 +19,7 @@ router.post('/',function(req,res){
 })
 
 router.put('/:id',function(req,res){
+	console.log(req.body.name)
 	User.findByIdAndUpdate({ "_id" : req.params.id},req.body).then((company)=>{
 		res.send(company)	
 	}).catch((err)=>{

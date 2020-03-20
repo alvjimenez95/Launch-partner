@@ -18,7 +18,7 @@ export default function UserCard (props){
 		        </div>
 
 		        <div className="lime card-action">
-		          <button className="btn-floating" onClick={() => props.handleEditUser(props.user._id)} >
+		          <button className="btn-floating" onClick={() => props.handleEditUser(props.user)} >
 		         	 <i className="material-icons">edit</i>
 		          </button>
 		          <button className="btn-floating pl-2"onClick={() => props.handleDeleteUser(props.user._id)} >

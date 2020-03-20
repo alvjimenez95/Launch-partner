@@ -17,8 +17,10 @@ class App extends React.Component{
 		this.getUsers =this.getUsers.bind(this)
 		this.addUser = this.addUser.bind(this)
 		this.deleteUser =this.deleteUser.bind(this)
+		this.editUser= this.editUser.bind(this)
 		this.handleChange = this.handleChange.bind(this)
 		this.uploadFile = this.uploadFile.bind(this)
+		this.populateForm= this.populateForm.bind(this)
 
 	}
 	uploadFile(e){
@@ -71,17 +73,27 @@ class App extends React.Component{
         })
         .catch(err=>console.log(err))
 	}
-	editUser(_id){
-		fetch('/api/users/' + _id, {
+	populateForm(user){
+		this.setState({_id:user._id, name:user.name, profile:user.profile, profilepic: user.profilePic})
+	}
+	editUser(e){
+		e.preventDefault()
+		console.log(this.state)
+		console.log(this.state.profile)
+		fetch('/api/users/' + this.state._id, {
         	method: 'PUT',
+        	body: JSON.stringify({"name":this.state.name, 
+        							"profile":this.state.profile,
+        							"profilePic":this.state.profilepic
+        						}),
         	headers: {
-        	body: JSON.stringify({"name":this.state.name, "profile":this.state.profile}),
-          	'Accept': 'application/json',
-          	'Content-Type': 'application/json'
-        }})
+          		'Accept': 'application/json',
+          		'Content-Type': 'application/json'}
+          	})
         .then(res=>res.json())
         .then(result=>{
-        	console.log(result)
+        	this.setState({profile:"",name:"",profilepic:"",_id:""})
+        	M.toast({html: 'User updated!'})
         	this.getUsers()
         })
         .catch(err=>console.log(err))
@@ -97,7 +109,6 @@ class App extends React.Component{
 	handleChange(e){
 		const {name, value} = e.target
 		this.setState({[name]:value})
-		
 	}
 	componentDidMount(){
 		this.getUsers()
@@ -106,13 +117,18 @@ class App extends React.Component{
 		return(
 			<div>
 				<MainNav />
-				<UserForm handleAddUser = {this.addUser} handleChange={this.handleChange} 
-					name={this.state.name} profile={this.state.profile} handleUpload={this.uploadFile} />
+				<UserForm handleAddUser = {this.addUser} 
+							handleUpdateUser ={this.editUser}
+							handleChange={this.handleChange} 
+							name={this.state.name} 
+							profile={this.state.profile} 
+							_id={this.state._id} 
+							handleUpload={this.uploadFile} />
 				<div className="container center-align">
 				{this.state.users.map(user=>(
 					<UserCard key={user._id} user={user} 
 						handleDeleteUser ={this.deleteUser}
-						handleEditUser={this.editUser}/>
+						handleEditUser={this.populateForm}/>
 					))}
 				</div>
 

@@ -74,7 +74,9 @@ class App extends React.Component{
         .catch(err=>console.log(err))
 	}
 	populateForm(user){
-		this.setState({_id:user._id, name:user.name, profile:user.profile, profilepic: user.profilePic})
+		this.setState({_id:user._id, name:user.name, profile:user.profile, profilepic: user.profilePic},M.updateTextFields())
+		
+		window.scrollTo({top:0,left:0,behavior:'smooth'})
 	}
 	editUser(e){
 		e.preventDefault()

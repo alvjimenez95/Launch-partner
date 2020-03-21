@@ -10,13 +10,13 @@ export default function UserForm(props){
 		      <div className="row">
 		        <div className="input-field col s12 ">
 		          <input name="name" type="text" onChange={props.handleChange} value={props.name}/>
-		          <label htmlFor="name">Name</label>
+		          <label className="active" htmlFor="name">Name</label>
 		        </div>
 		      </div>
 		      <div className="row">
 		        <div className="input-field col s12">
 		          <textarea name="profile" className="materialize-textarea" onChange={props.handleChange} value={props.profile}/>
-		          <label htmlFor="profile">profile</label>
+		          <label className="active" htmlFor="profile">profile</label>
 		        </div>
 		      </div>
 		      <div className="row">
